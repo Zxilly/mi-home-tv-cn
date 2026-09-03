@@ -1,0 +1,11 @@
+.cache/
+dist/
+work/
+*.apk
+*.apkm
+*.apks
+*.xapk
+*.zip
+*.jks
+*.keystore
+__pycache__/
