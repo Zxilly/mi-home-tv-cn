@@ -9,11 +9,11 @@ permissions:
 jobs:
   test:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        shell: [powershell, pwsh]
     steps:
       - uses: actions/checkout@v7
-      - name: Verify UTF-8 manifest writer
-        shell: ${{ matrix.shell }}
+      - name: Verify Windows PowerShell 5.1 manifest writer
+        shell: powershell
+        run: .\scripts\tests\manifest-encoding.Tests.ps1
+      - name: Verify PowerShell 7 manifest writer
+        shell: pwsh
         run: .\scripts\tests\manifest-encoding.Tests.ps1
