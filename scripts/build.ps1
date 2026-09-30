@@ -109,7 +109,11 @@ try {
     $manifest.name = 'Mi Home TV global4 CN test'
     $manifest.version_name = '2.8.0.2-cn1'
     $manifest.total_size = (Get-ChildItem $signedDir -Filter '*.apk' | Measure-Object Length -Sum).Sum
-    $manifest | ConvertTo-Json -Depth 20 | Set-Content (Join-Path $signedDir 'manifest.json') -Encoding utf8NoBOM
+    [IO.File]::WriteAllText(
+        (Join-Path $signedDir 'manifest.json'),
+        ($manifest | ConvertTo-Json -Depth 20),
+        (New-Object Text.UTF8Encoding($false))
+    )
 
     $xapk = Join-Path $outputPath 'MiHome-TV-global4-CN-2.8.0.2-cn1.xapk'
     if (Test-Path -LiteralPath $xapk) { Remove-Item -LiteralPath $xapk -Force }
