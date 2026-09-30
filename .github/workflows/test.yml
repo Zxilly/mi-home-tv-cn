@@ -1,0 +1,19 @@
+name: Test manifest encoding
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        shell: [powershell, pwsh]
+    steps:
+      - uses: actions/checkout@v7
+      - name: Verify UTF-8 manifest writer
+        shell: ${{ matrix.shell }}
+        run: .\scripts\tests\manifest-encoding.Tests.ps1
